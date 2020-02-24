@@ -1,35 +1,37 @@
 package com.example.jsfdemo.data;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
-public class Robot {
-    private Long id;
+@Entity
+@Table(name = "prime_robot")
+public class Robot  extends AbstractEntity{
+    
+    
+    @Column
     private String name;
+    
+    @Column
     private String type;
-    private String weapon;
-    private Date createdDate;
-    private Date lastModifiedDate;
+    
+    @JoinColumn(name = "id")
+    private Weapon weapon;
 
+   
     public Robot() {
     }
 
-    public Robot(Long id, String name, String type, String weapon, Date createdDate, Date lastModifiedDate) {
-        this.id = id;
+    public Robot(Long id, Date createdDate, Date lastModifiedDate, String name, String type,Weapon weapon) {
+        super(id,createdDate,lastModifiedDate);
         this.name = name;
         this.type = type;
         this.weapon = weapon;
-        this.createdDate = createdDate;
-        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -46,27 +48,13 @@ public class Robot {
         this.type = type;
     }
 
-    public String getWeapon() {
+    public Weapon getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(String weapon) {
+    public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-}

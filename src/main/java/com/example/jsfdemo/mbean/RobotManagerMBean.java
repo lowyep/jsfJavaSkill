@@ -1,43 +1,64 @@
 package com.example.jsfdemo.mbean;
 
+import com.example.jsfdemo.data.Weapon;
 import com.example.jsfdemo.data.Robot;
+import com.example.jsfdemo.repository.RobotRepository;
+import com.example.jsfdemo.repository.WeaponRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.inject.Named;
+import java.util.List;
 
+@Transactional
 @Named
 @ViewScoped
 public class RobotManagerMBean {
-
-    public RobotManagerMBean() {
-    init();
-    }
-    
-
-    
- 
-    
-
     private List<Robot> robotList;
+    private List<Weapon> weaponList;
+    
+    
+    @Autowired
+    private RobotRepository repository;
+
+    @Autowired
+    private WeaponRepository weaponRepository;
+
+    private Robot selectedRobot;
 
     @PostConstruct
     private void init() {
-        robotList = new ArrayList<>();
-        for (int i=0; i < 100; i++) {
-            Robot robi = new Robot();
-            robi.setId(Long.parseLong(i + ""));
-            robi.setName("Droideka" + i);
-            robi.setType("T-4000");
-            robi.setWeapon("Sodrófa");
-            robi.setCreatedDate(new Date());
-            robi.setLastModifiedDate(new Date());
-            robotList.add(robi);
+        loadAll();
+        selectedRobot = new Robot();
+        weaponList = weaponRepository.findAll();
+    }
+
+    public void save() {
+        if (selectedRobot.getId() == null) {
+            repository.save(selectedRobot);
+        } else {
+            repository.update(selectedRobot);
         }
+        loadAll();
+        selectedRobot = new Robot();
+    }
+
+    public void delete(Long id) {
+        repository.delete(id);
+        loadAll();
+
+    }
+
+    public void selectOne(Robot weapon) {
+        selectedRobot = weapon;
+
+    }
+
+    private void loadAll() {
+        robotList = repository.findAll();
     }
 
     public List<Robot> getRobotList() {
@@ -46,5 +67,17 @@ public class RobotManagerMBean {
 
     public void setRobotList(List<Robot> robotList) {
         this.robotList = robotList;
+    }
+
+    public Robot getSelectedRobot() {
+        return selectedRobot;
+    }
+
+    public void setSelectedRobot(Robot selectedRobot) {
+        this.selectedRobot = selectedRobot;
+    }
+
+    public List<Weapon> getWeaponList() {
+        return weaponList;
     }
 }

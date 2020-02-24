@@ -1,3 +1,13 @@
-com\example\jsfdemo\data\Robot.class
+com\example\jsfdemo\repository\impl\RobotRepositoryImpl.class
+com\example\jsfdemo\repository\CoreCrudRepository.class
 com\example\jsfdemo\mbean\RobotManagerMBean.class
+com\example\jsfdemo\data\Robot.class
+com\example\jsfdemo\repository\impl\WeaponRepositoryImpl.class
+com\example\jsfdemo\repository\RobotRepository.class
+com\example\jsfdemo\data\AbstractEntity.class
 com\example\jsfdemo\JsfdemoApplication.class
+com\example\jsfdemo\converter\WeaponConverter.class
+com\example\jsfdemo\mbean\WeaponManagerMBean.class
+com\example\jsfdemo\data\Weapon.class
+com\example\jsfdemo\repository\WeaponRepository.class
+com\example\jsfdemo\repository\impl\CoreCrudRepositoryImpl.class
