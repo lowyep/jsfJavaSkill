@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +18,8 @@ public class Robot  extends AbstractEntity{
     @Column
     private String type;
     
+    
+    @ManyToOne
     @JoinColumn(name = "id")
     private Weapon weapon;
 
